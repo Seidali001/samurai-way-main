@@ -1,33 +1,15 @@
 import React from 'react';
 import './App.css';
-import hivar from './hivar.png'
 import world from './world.jpg'
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 
 
 function App() {
     return (
         <div className="app-wrapper">
-            <div className="header">
-                <header>
-                    <img
-                        src={hivar}
-                        alt="logo"/>
-                </header>
-            </div>
-            <nav className="nav">
-                <div>
-                    <a>Profile</a>
-                </div>
-                <div>
-                    <a>Messages</a>
-                </div>
-                <div>
-                    <a>News</a>
-                </div>
-                <div>
-                    <a>Settings</a>
-                </div>
-            </nav>
+            <Header/>
+            <Navbar/>
             <div className="content">
                 <div>
                     <img src={world}/>
