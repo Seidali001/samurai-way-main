@@ -1,21 +1,26 @@
 import React from 'react';
 import './App.css';
-import './logo-hivar.png'
+import hivar from './hivar.png'
+
 
 function App() {
     return (
         <div className="App app-wrapper">
-            <header>
-                <img src="logo-hivar.png" alt="logo-hivar"/>
-            </header>
-            <nav>
+            <div className="header">
+                <header>
+                    <img
+                        src={hivar}
+                        alt="logo"/>
+                </header>
+            </div>
+            <nav className="nav">
                 <div>
                     Profile
                 </div>
                 <div>
                     Message
                 </div>
-                <div>
+                <div className="content">
                     Main content
                 </div>
             </nav>
