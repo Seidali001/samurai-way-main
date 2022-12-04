@@ -23,12 +23,17 @@
 
 .nav {
     grid-area: n;
-    background-color: cadetblue;
+    background-color: rgb(74, 83, 93) !important;
+}
+
+.nav-elem-a {
+    color: white;
 }
 
 .content {
     grid-area: c;
-    background-color: #597fc6;
+    background-color: #000000;
+    color: white;
 }
 
 .content img {

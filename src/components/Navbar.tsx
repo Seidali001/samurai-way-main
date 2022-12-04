@@ -4,16 +4,16 @@ const Navbar = () => {
     return (
         <nav className="nav">
             <div>
-                <a>Profile</a>
+                <a className="nav-elem-a">Profile</a>
             </div>
             <div>
-                <a>Messages</a>
+                <a className="nav-elem-a">Messages</a>
             </div>
             <div>
-                <a>News</a>
+                <a className="nav-elem-a">News</a>
             </div>
             <div>
-                <a>Settings</a>
+                <a className="nav-elem-a">Settings</a>
             </div>
         </nav>
     )
