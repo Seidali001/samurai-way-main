@@ -1,0 +1,12 @@
+
+.content {
+    grid-area: c;
+    background-color: #000000;
+    color: #f2de07;
+}
+
+.content img {
+    width: 1000px;
+
+    justify-content: center;
+}
