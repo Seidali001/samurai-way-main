@@ -1,0 +1,28 @@
+.dialogs {
+    display: flex;
+}
+
+.dialogsItems {
+    padding-left: 15px;
+
+}
+
+.dialogsItems .active {
+    color: gold;
+
+}
+
+.dialog {
+
+}
+
+
+.messages {
+    /*background-color: #efe8ea;*/
+    color: black;
+    padding-left: 15px;
+}
+
+.message {
+
+}
