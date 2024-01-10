@@ -1,0 +1,24 @@
+.item {
+    grid-area: c;
+    color: #f2073a;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border-radius: 0.75rem;
+    border: none;
+}
+.image {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: none;
+}
+
+.item {
+    color: #000000;
+    
+}
+
+.item img {  
+    width: 40px;
+}

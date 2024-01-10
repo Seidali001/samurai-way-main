@@ -1,0 +1,18 @@
+.skletonContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 65px;
+    padding-top: 40px;
+}
+
+.skeletonAvatar {
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+
+.skeletonInfo {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}

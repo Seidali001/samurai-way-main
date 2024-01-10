@@ -1,0 +1,8 @@
+.image {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: none;
+}
+.descriptionBlock {
+    padding: 10px;
+}

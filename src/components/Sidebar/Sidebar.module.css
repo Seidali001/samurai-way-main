@@ -1,0 +1,45 @@
+.item:hover {
+    background-color: #42424a;
+    border-radius: 10px;
+}
+.sideBar {
+    justify-content: space-evenly;
+    display: flex;
+    top: 67%;
+    height: 80px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    position: fixed;
+
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: 0.00938em;
+    white-space: nowrap;
+    box-sizing: inherit;
+    width: 15.625rem;
+    margin: 1rem;
+    border-radius: 0.55rem;
+    box-shadow: 0rem 1.25rem 1.6875rem 0rem rgba(0, 0, 0, 0.05);
+    background: linear-gradient(195deg, #42424a, #191919);
+    transform: translateX(0);
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+}
+
+.active {
+    text-decoration: none;
+    color: #030303;
+    /* Белый цвет текста при наведении */
+    background-color: rgb(255, 255, 0);
+    /* Черный цвет фона при наведении */
+    border-radius: 6px;
+    font-size: 19px;
+}
