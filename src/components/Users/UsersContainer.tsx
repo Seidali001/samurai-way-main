@@ -12,9 +12,6 @@ import {Dispatch} from "redux";
 import {AppRootStateType} from "../../redux-store/redux-store";
 import axios from "axios";
 import Users from "./Users";
-import preloader3 from "../../assets/image/loader3.gif"
-import Skeleton from "@mui/material/Skeleton";
-import Preloader from "../common/Preloader/Preloader";
 
 
 export type UsersClassComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
