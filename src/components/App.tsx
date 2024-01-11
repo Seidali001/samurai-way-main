@@ -12,18 +12,14 @@ import {useSelector} from "react-redux";
 import store, {AppRootStateType} from "../redux-store/redux-store";
 import {DialogPagesType, ProfilePagesType} from "../reducers/types";
 import DialogsContainer from "./DialogsContainer/DialogsContainer";
-//import Users from "./Users/Users";
 import {ConnectedUsersContainer} from "./Users/UsersContainer";
 import React from "react";
 
 
-
-
-
 function App() {
 
-   const dialogPages = useSelector<AppRootStateType, DialogPagesType>(state => state.dialogPages)
-   const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)
+    const dialogPages = useSelector<AppRootStateType, DialogPagesType>(state => state.dialogPages)
+    const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)
     return (
         <div className="app-wrapper">
             <Header/>

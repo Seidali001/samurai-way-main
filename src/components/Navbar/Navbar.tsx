@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 export const Navbar = () => {
 
 
-    return (<div style={{position: 'relative', width:'17.625rem'}}>
+    return (<div style={{position: 'relative', width: '17.625rem'}}>
             <nav className={`${s.nav}`}>
                 <div>
                     <div className={s.item}>
