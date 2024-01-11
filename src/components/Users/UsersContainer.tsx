@@ -82,7 +82,6 @@ export class UsersClassApiComponent extends Component<UsersClassComponentPropsTy
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(res => {
                 this.props.toggleIsFetchingCallback(false)
-                // console.log(res.data.items)
                 this.props.setUsersCallback(res.data.items);
                 //   this.props.setUsersTotalCountCallback(res.data.totalCount)
             })
@@ -95,14 +94,11 @@ export class UsersClassApiComponent extends Component<UsersClassComponentPropsTy
 
     setCurrentPageHandler = (currentPage: number) => {
         this.props.toggleIsFetchingCallback(true)
-        // this.props.setCurrentPageCallback(currentPage)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${10}`)
             .then(res => {
                 this.props.toggleIsFetchingCallback(false)
-                console.log(res.data.totalCount)
                 this.props.setUsersCallback(res.data.items);
                 this.props.setCurrentPageCallback(currentPage)
-                //  this.props.setUsersTotalCountCallback(res.data.totalCount)
             })
             .catch(error => {
                 this.props.toggleIsFetchingCallback(false)
