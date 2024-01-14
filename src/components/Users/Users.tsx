@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import UserAvatar from "../../assets/image/userAvatar.jpg";
 import {UsersFromServerType} from "../../reducers/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 
 type UsersType = {
@@ -52,10 +53,12 @@ const Users: React.FC<UsersType> = (props) => {
                             return (
                                 <div className={s.usersBlock} key={us.id}>
                                 <span className={s.userAddBlock}>
-                                    <img className={s.avatarImg}
+                                    <NavLink to={`/profile/${us.id}`}>
+                                      <img className={s.avatarImg}
                                          src={us.photos.small != null ? us.photos.small : UserAvatar}
                                          alt="avatar"
-                                    />
+                                      />
+                                    </NavLink>
                                     {us.followed ? <button className={s.follow}
                                                            onClick={() => props.setFollowOnFalse(us.id)}>
                                             follow

@@ -11,33 +11,40 @@ export const Navbar = () => {
                 <div>
                     <div className={s.item}>
                         <NavLink to={"/profile"}
-                                 className={({isActive}) => (isActive ? s.active : s.link)}>Profile</NavLink>
+                                 activeClassName={s.active}
+                            /*className={({isActive}) => (isActive ? s.active : s.link)}*/
+                                 >Profile</NavLink>
                     </div>
                 </div>
                 <div>
                     <div className={s.item}>
                         <NavLink to={"/dialogs"}
-                                 className={({isActive}) => (isActive ? s.active : s.link)}>Messages</NavLink>
+                                 activeClassName={s.active}
+                                 >Messages</NavLink>
                     </div>
 
                 </div>
                 <div>
                     <div className={s.item}>
                         <NavLink to={"/users"}
-                                 className={({isActive}) => (isActive ? s.active : s.link)}>Users</NavLink>
+                                 activeClassName={s.active}
+                                 >Users</NavLink>
                     </div>
 
                 </div>
                 <div>
                     <div className={s.item}>
-                        <NavLink to={"/news"} className={({isActive}) => (isActive ? s.active : s.link)}>News</NavLink>
+                        <NavLink to={"/news"}
+                                 activeClassName={s.active}
+                                 >News</NavLink>
                     </div>
 
                 </div>
                 <div>
                     <div className={s.item}>
                         <NavLink to={"/setting"}
-                                 className={({isActive}) => (isActive ? s.active : s.link)}>Settings</NavLink>
+                                 activeClassName={s.active}
+                                 >Settings</NavLink>
                     </div>
 
                 </div>

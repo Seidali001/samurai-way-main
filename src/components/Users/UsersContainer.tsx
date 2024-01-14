@@ -15,6 +15,7 @@ import Users from "./Users";
 
 
 export type UsersClassComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
+
 export type mapStateToPropsType = {
     users: UsersFromServerType[]
     pageCount: number

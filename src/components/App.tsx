@@ -1,4 +1,4 @@
-import {NavLink, Route, Routes} from "react-router-dom";
+import {NavLink, Route} from "react-router-dom";
 import './App.css';
 import Header from "./Header/Header";
 import Navbar from "./Navbar/Navbar";
@@ -14,12 +14,13 @@ import {DialogPagesType, ProfilePagesType} from "../reducers/types";
 import DialogsContainer from "./DialogsContainer/DialogsContainer";
 import {ConnectedUsersContainer} from "./Users/UsersContainer";
 import React from "react";
+import ProfileContainer, {ConnectedUserProfileContainer} from "./Profile/ProfileContainer";
 
 
 function App() {
 
-    const dialogPages = useSelector<AppRootStateType, DialogPagesType>(state => state.dialogPages)
-    const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)
+/*    const dialogPages = useSelector<AppRootStateType, DialogPagesType>(state => state.dialogPages)
+    const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)*/
     return (
         <div className="app-wrapper">
             <Header/>
@@ -31,18 +32,14 @@ function App() {
                 <NavLink to={"/users"}/>
                 <NavLink to={"/news"}/>
                 <NavLink to={"/setting"}/>
-                <Routes>
                     <Route path={"/*"}
-                           element={<img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>
-                    <Route path={"/dialogs/*"} element={<DialogsContainer
+                           render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>
+                    <Route path={"/dialogs/*"} render={() => <DialogsContainer
                         state={store.getState()}/>}/>
-                    <Route path={"/profile"} element={<Profile
-                        state={store.getState().profilePage}/>}/>
-                    <Route path={"/news"} element={<News/>}/>
-                    <Route path={"/users"} element={<ConnectedUsersContainer/>}/>
-
-                    <Route path={"/setting"} element={<Setting/>}/>
-                </Routes>
+                    <Route path={"/profile/:userId"} render={() => <ConnectedUserProfileContainer/>}/>
+                    <Route path={"/news"} render={() => <News/>}/>
+                    <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
+                    <Route path={"/setting"} render={() => <Setting/>}/>
             </div>
         </div>
     );

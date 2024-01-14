@@ -1,6 +1,5 @@
-// Actions type
 import {addMessageAC, updateNewTextMessageAC} from "./dialogs-reducer";
-import {addPostAC, updateNewTextPostAC} from "./profile-reducer";
+import {addPostAC, ServerUserProfileType, setUsersProfileAC, updateNewTextPostAC} from "./profile-reducer";
 import {
     follow,
     setCurrentPage,
@@ -23,10 +22,10 @@ export type ActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUsersProfileAC>
 
 
 // State types
-
 type PostsType = {
     id: number
     text: string
@@ -35,6 +34,7 @@ type PostsType = {
 export type ProfilePagesType = {
     newText: string
     posts: PostsType[]
+    profile: ServerUserProfileType
 }
 
 export type DialogPagesType = {
