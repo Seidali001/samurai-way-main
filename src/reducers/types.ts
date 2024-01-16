@@ -8,6 +8,7 @@ import {
     toggleIsFetching,
     unFollow
 } from "./users-reducer";
+import {setUserDataAC} from "./auth-reducer";
 
 
 // Actions type
@@ -23,6 +24,7 @@ export type ActionsType =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUsersProfileAC>
+    | ReturnType<typeof setUserDataAC>
 
 
 // State types

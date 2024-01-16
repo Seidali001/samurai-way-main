@@ -32,11 +32,11 @@ function App() {
                 <NavLink to={"/users"}/>
                 <NavLink to={"/news"}/>
                 <NavLink to={"/setting"}/>
-                    <Route path={"/*"}
-                           render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>
-                    <Route path={"/dialogs/*"} render={() => <DialogsContainer
+                   {/* <Route path={"/*"}
+                           render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>*/}
+                    <Route path={"/dialogs"} render={() => <DialogsContainer
                         state={store.getState()}/>}/>
-                    <Route path={"/profile/:userId"} render={() => <ConnectedUserProfileContainer/>}/>
+                    <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
                     <Route path={"/setting"} render={() => <Setting/>}/>

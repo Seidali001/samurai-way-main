@@ -34,26 +34,27 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export type ProfileContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
-type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
+export type ComponentWithRouterPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-class ProfileContainer extends Component<PropsType> {
-    constructor(props: PropsType) {
+type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & ComponentWithRouterPropsType
+
+class ProfileContainer extends Component<ProfileContainerPropsType> {
+    constructor(props: ProfileContainerPropsType) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     componentDidMount() {
-        debugger
         let userId = this.props.match.params.userId
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`  + userId)
+        if (!userId) {
+            userId = "2"
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
                 // this.props.toggleIsFetchingCallback(false)
                 // console.log(typeof res.data)
                 this.props.setUserProfile(res.data);
-               // debugger
+                // debugger
                 //   this.props.setUsersTotalCountCallback(res.data.totalCount)
             })
             .catch(error => {

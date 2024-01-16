@@ -3,8 +3,9 @@
     background-color: #000000;
     border-radius: 0.35rem;
     border: none;
-    position: sticky;
-    top: 0px;
+    position: fixed;
+    width: 80%;
+  /* top: 10px;*/
 }
 
 .header img {
@@ -18,3 +19,24 @@
     height: 80px;
     flex-shrink: 0;
 }
+.loginLink {
+    float: right;
+    margin: 20px;
+}
+
+.loginLink a {
+    color: white;
+    text-decoration: none;
+}
+
+/*@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}*/
