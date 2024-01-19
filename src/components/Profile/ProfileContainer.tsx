@@ -7,6 +7,7 @@ import {AppRootStateType} from "../../redux-store/redux-store";
 import {Dispatch} from "redux";
 import {ServerUserProfileType, setUsersProfileAC} from "../../reducers/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {profileApi} from "../../api/profile";
 
 type PathParamsType = {
     userId: string
@@ -49,17 +50,11 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
         if (!userId) {
             userId = "2"
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(res => {
-                // this.props.toggleIsFetchingCallback(false)
-                // console.log(typeof res.data)
-                this.props.setUserProfile(res.data);
-                // debugger
-                //   this.props.setUsersTotalCountCallback(res.data.totalCount)
+        profileApi.getProfile(userId)
+            .then(data => {
+                this.props.setUserProfile(data);
             })
             .catch(error => {
-                // this.props.toggleIsFetchingCallback(false)
-
                 console.error("Error fetching users:", error);
             });
     }
@@ -68,8 +63,6 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
         return (
             <div>
                 <Profile state={this.props.profile}/>
-                {/* <ProfileInfo/>
-            <MyPostsContainer profilePages={this.props.state}/>*/}
             </div>
         )
     }

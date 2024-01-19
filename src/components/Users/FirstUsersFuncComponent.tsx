@@ -7,7 +7,9 @@ import UserAvatar from "../../assets/image/userAvatar.jpg"
 const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) => {
 
     useEffect(() => {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get("https://social-network.samuraijs.com/api/1.0/users", {
+            withCredentials: true
+        })
             .then(res => {
                 props.setUsersCallback(res.data.items)
 

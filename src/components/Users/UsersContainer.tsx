@@ -13,6 +13,7 @@ import {AppRootStateType} from "../../redux-store/redux-store";
 import axios from "axios";
 import Users from "./Users";
 import zIndex from "@mui/material/styles/zIndex";
+import {userApi} from "../../api/users";
 
 
 export type UsersClassComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
@@ -81,10 +82,10 @@ export class UsersClassApiComponent extends Component<UsersClassComponentPropsTy
 
     componentDidMount() {
         this.props.toggleIsFetchingCallback(true)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(res => {
+        userApi.getUsers()
+            .then(data => {
                 this.props.toggleIsFetchingCallback(false)
-                this.props.setUsersCallback(res.data.items);
+                this.props.setUsersCallback(data.items);
                 //   this.props.setUsersTotalCountCallback(res.data.totalCount)
             })
             .catch(error => {
@@ -96,10 +97,10 @@ export class UsersClassApiComponent extends Component<UsersClassComponentPropsTy
 
     setCurrentPageHandler = (currentPage: number) => {
         this.props.toggleIsFetchingCallback(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${10}`)
-            .then(res => {
+        userApi.getCurrentPageUsers(currentPage, 10)
+            .then(data => {
                 this.props.toggleIsFetchingCallback(false)
-                this.props.setUsersCallback(res.data.items);
+                this.props.setUsersCallback(data.items);
                 this.props.setCurrentPageCallback(currentPage)
             })
             .catch(error => {

@@ -3,17 +3,27 @@ import hivar from "../../hivar.png";
 import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 
-const Header = () => {
+type HeaderPropsType = {
+    isAuth: boolean
+    login: string
+}
+
+const Header: React.FC<HeaderPropsType> = ({isAuth, login}) => {
     return (
         <div className={s.header}>
             <header>
                 <img className="logo-header"
-                    src={hivar}
-                    alt="logo"/>
+                     src={hivar}
+                     alt="logo"/>
                 <div className={s.loginLink}>
-                    <NavLink to={"/login"}>
-                        <span className={s.span}>Login</span>
-                    </NavLink>
+                    {isAuth ?
+                        <NavLink to={"/profile"}>
+                            {login}
+                        </NavLink>
+                        :
+                        <NavLink to={"/login"}>
+                            Login
+                        </NavLink>}
                 </div>
             </header>
         </div>

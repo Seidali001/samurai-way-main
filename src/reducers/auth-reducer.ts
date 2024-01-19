@@ -1,26 +1,28 @@
 import {ActionsType} from "./types";
 
 
-type ServerAuthUserDataType = {
+export type ServerAuthUserDataType = {
     id: number
     email: string
     login: string
 }
 
-export type initialStateUsersType = typeof initialState
+export type initialStateAuthType = typeof initialState
 
 const initialState = {
     id: 0,
     email: "",
-    login: ""
+    login: "",
+    isAuth: false
 }
 
-export const authReducer = (state: initialStateUsersType = initialState, action: ActionsType): initialStateUsersType => {
+export const authReducer = (state: initialStateAuthType = initialState, action: ActionsType): initialStateAuthType => {
     switch (action.type) {
         case "SET-USER-DATA": {
             return {
                 ...state,
-                ...action.userData
+                ...action.data,
+                isAuth: true
             }
         }
 
@@ -31,15 +33,15 @@ export const authReducer = (state: initialStateUsersType = initialState, action:
 
 
 // Action Creators
-export const follow = (userId: number) => {
+/*export const follow = (userId: number) => {
     return {
         type: "FOLLOW",
         userId: userId
     } as const
-}
-export const setUserDataAC = (authUserData: ServerAuthUserDataType) => {
+}*/
+export const setUserDataAC = (data: ServerAuthUserDataType) => {
     return {
         type: "SET-USER-DATA",
-        userData: authUserData
+        data
     } as const
 }

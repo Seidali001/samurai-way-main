@@ -4,10 +4,11 @@ import UserAvatar from "../../assets/image/userAvatar.jpg";
 import {UsersFromServerType} from "../../reducers/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+import {deepEqual} from "node:assert";
 
 
 type UsersType = {
-
     isFetching: boolean
     users: UsersFromServerType[]
     totalUserCount: number
@@ -33,7 +34,6 @@ const Users: React.FC<UsersType> = (props) => {
 
     return (
         <div>
-
             <div className={s.usersMainBlock}>
                 <h1 className={s.users}>Users</h1>
                 <div className={s.pages}>
@@ -55,18 +55,47 @@ const Users: React.FC<UsersType> = (props) => {
                                 <span className={s.userAddBlock}>
                                     <NavLink to={`/profile/${us.id}`}>
                                       <img className={s.avatarImg}
-                                         src={us.photos.small != null ? us.photos.small : UserAvatar}
-                                         alt="avatar"
+                                           src={us.photos.small != null ? us.photos.small : UserAvatar}
+                                           alt="avatar"
                                       />
                                     </NavLink>
-                                    {us.followed ? <button className={s.follow}
-                                                           onClick={() => props.setFollowOnFalse(us.id)}>
-                                            follow
-                                        </button> :
+                                    {us.followed ?
                                         <button className={s.unFollow}
-                                                onClick={() => props.setFollowOnTrue(us.id)}>
+                                                onClick={() => {
+                                                    let userId = us.id
+                                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+                                                        withCredentials: true,
+                                                        headers: {
+                                                            "API-KEY": "49d35d50-df50-4fa4-b94f-9014bc346a45"
+                                                        }
+                                                    })
+                                                        .then(res => {
+                                                            if (res.data.resultCode == 0) {
+                                                                props.setFollowOnFalse(us.id)
+                                                            }
+                                                        })
+                                                }}>
                                             unfollow
                                         </button>
+                                        :
+                                        <button className={s.follow}
+                                                onClick={() => {
+                                                    let userId = us.id
+                                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+                                                        withCredentials: true,
+                                                        headers: {
+                                                            "API-KEY": "49d35d50-df50-4fa4-b94f-9014bc346a45"
+                                                        }
+                                                    })
+                                                        .then(res => {
+                                                            if (res.data.resultCode == 0) {
+                                                                props.setFollowOnTrue(us.id)
+                                                            }
+                                                        })
+                                                }}>
+                                            follow
+                                        </button>
+
                                     }
                                 </span>
                                     <div className={s.userInfo}>

@@ -15,6 +15,7 @@ import DialogsContainer from "./DialogsContainer/DialogsContainer";
 import {ConnectedUsersContainer} from "./Users/UsersContainer";
 import React from "react";
 import ProfileContainer, {ConnectedUserProfileContainer} from "./Profile/ProfileContainer";
+import {ConnectedHeaderComponent} from "./Header/HeaderContainer/HeaderContainer";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
     const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)*/
     return (
         <div className="app-wrapper">
-            <Header/>
+            <ConnectedHeaderComponent />
             <Navbar/>
             <Sidebar/>
             <div className="app-wrapper-content">
@@ -39,6 +40,7 @@ function App() {
                     <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
+                {/*<Route path={"/login"} render={() => <ConnectedHeaderComponent/> }/>*/}
                     <Route path={"/setting"} render={() => <Setting/>}/>
             </div>
         </div>
