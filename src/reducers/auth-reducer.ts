@@ -1,4 +1,6 @@
 import {ActionsType} from "./types";
+import {authMeApi} from "../api/authMe";
+import {Dispatch} from "redux";
 
 
 export type ServerAuthUserDataType = {
@@ -44,4 +46,14 @@ export const setUserDataAC = (data: ServerAuthUserDataType) => {
         type: "SET-USER-DATA",
         data
     } as const
+}
+
+export const authMeTC = () => (dispatch: Dispatch) => {
+    authMeApi.getAuthMe()
+        .then(data => {
+            dispatch(setUserDataAC(data))
+        })
+        .catch(error => {
+            console.error("Error auth me:", error);
+        });
 }
