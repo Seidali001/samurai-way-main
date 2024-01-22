@@ -4,6 +4,7 @@ import UserAvatar from "../../assets/image/userAvatar.jpg";
 import {UsersFromServerType} from "../../reducers/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 
 type UsersType = {
@@ -19,6 +20,9 @@ type UsersType = {
 }
 
 const Users: React.FC<UsersType> = (props) => {
+
+    const dispatch = useDispatch
+
     if (props.users === null) {
         return <p>Loading...</p>; // или любая другая заглушка
     }

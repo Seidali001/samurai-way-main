@@ -1,5 +1,6 @@
 import {ActionsType} from "./types";
 import {userApi} from "../api/users";
+import {followApi} from "../api/follow";
 import {Dispatch} from "redux";
 import axios from "axios";
 
@@ -175,7 +176,7 @@ export const setCurrentPageTC = (currentPage: number) => (dispatch: Dispatch) =>
 }
 export const setUnfollowTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFollowingInProgress(true, userId))
-    userApi.setUnfollowUser(userId)
+    followApi.setUnfollowUser(userId)
         .then(data => {
             if (data.resultCode == 0) {
                 dispatch(unFollow(userId))
@@ -189,7 +190,7 @@ export const setUnfollowTC = (userId: number) => (dispatch: Dispatch) => {
 }
 export const setFollowTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFollowingInProgress(true, userId))
-    userApi.setFollowUser(userId)
+    followApi.setFollowUser(userId)
         .then(data => {
             if (data.resultCode == 0) {
                 dispatch(follow(userId))
