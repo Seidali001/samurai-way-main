@@ -1,4 +1,6 @@
 import {ActionsType} from "./types";
+import {userApi} from "../api/users";
+import {Dispatch} from "redux";
 
 
 export type UsersFromServerType = {
@@ -20,7 +22,8 @@ const initialState = {
     pageCount: 1,
     totalUserCounter: 100,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    isFollowingInProgress: [1, 2] as Array<number>
 }
 
 export const usersReducer = (state: initialStateUsersType = initialState, action: ActionsType): initialStateUsersType => {
@@ -77,6 +80,17 @@ export const usersReducer = (state: initialStateUsersType = initialState, action
                 isFetching: action.isFetching
             }
         }
+        case "TOGGLE-FOLLOWING-PROGRESS": {
+            debugger
+            return {
+                ...state,
+                isFollowingInProgress: state.isFetching
+                    ?
+                    [...state.isFollowingInProgress, action.userId]
+                    :
+                    state.isFollowingInProgress.filter((id: number) => id === action.userId)
+            }
+        }
         default:
             return state
     }
@@ -119,4 +133,28 @@ export const toggleIsFetching = (isFetching: boolean) => {
         type: "TOGGLE-IS-FETCHING",
         isFetching
     } as const
+}
+export const toggleIsFollowingInProgress = (isFollowing: boolean, userId: number) => {
+    debugger
+    return {
+        type: "TOGGLE-FOLLOWING-PROGRESS",
+        isFollowing,
+        userId
+    } as const
+}
+
+export const getUsersThunkCreator = () => (dispatch: Dispatch) => {
+    debugger
+    dispatch(toggleIsFetching(true))
+    userApi.getUsers()
+        .then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            //   this.props.setUsersTotalCountCallback(res.data.totalCount)
+        })
+        .catch(error => {
+            dispatch(toggleIsFetching(false))
+
+            console.error("Error fetching users:", error);
+        });
 }

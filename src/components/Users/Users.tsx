@@ -10,13 +10,15 @@ import {deepEqual} from "node:assert";
 
 type UsersType = {
     isFetching: boolean
+    isFollowingInProgress: Array<number>
     users: UsersFromServerType[]
     totalUserCount: number
     pageCount: number
     currentPage: number
-    setCurrentPageHandler: (p: number) => void
-    setFollowOnFalse: (id: number) => void
-    setFollowOnTrue: (id: number) => void
+    setCurrentPage: (p: number) => void
+    setUnfollow: (id: number) => void
+    setFollow: (id: number) => void
+    toggleIsFollowingInProgress: (isFollowing: boolean, userId: number) => void
 }
 
 const Users: React.FC<UsersType> = (props) => {
@@ -39,7 +41,7 @@ const Users: React.FC<UsersType> = (props) => {
                 <div className={s.pages}>
                     {pages.map((p) => {
                         return <span className={props.currentPage === p ? s.selectedPage : ""}
-                                     onClick={() => props.setCurrentPageHandler(p)}
+                                     onClick={() => props.setCurrentPage(p)}
                         >
                             {p}
                         </span>
@@ -60,8 +62,10 @@ const Users: React.FC<UsersType> = (props) => {
                                       />
                                     </NavLink>
                                     {us.followed ?
-                                        <button className={s.unFollow}
+                                        <button disabled={props.isFollowingInProgress.some(id => id === us.id)}
+                                                className={s.unFollow}
                                                 onClick={() => {
+                                                    props.toggleIsFollowingInProgress(true, us.id)
                                                     let userId = us.id
                                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
                                                         withCredentials: true,
@@ -71,16 +75,23 @@ const Users: React.FC<UsersType> = (props) => {
                                                     })
                                                         .then(res => {
                                                             if (res.data.resultCode == 0) {
-                                                                props.setFollowOnFalse(us.id)
+                                                                props.setUnfollow(us.id)
+                                                                console.log(props.isFollowingInProgress)
+                                                                debugger
                                                             }
+                                                            props.toggleIsFollowingInProgress(false, us.id)
+
                                                         })
-                                                }}>
+                                                }}
+                                                >
                                             unfollow
                                         </button>
                                         :
-                                        <button className={s.follow}
+                                        <button disabled={props.isFollowingInProgress.some(id => id === us.id)}
+                                                className={s.follow}
                                                 onClick={() => {
                                                     let userId = us.id
+                                                    props.toggleIsFollowingInProgress(true, us.id)
                                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
                                                         withCredentials: true,
                                                         headers: {
@@ -89,9 +100,14 @@ const Users: React.FC<UsersType> = (props) => {
                                                     })
                                                         .then(res => {
                                                             if (res.data.resultCode == 0) {
-                                                                props.setFollowOnTrue(us.id)
+                                                                props.setFollow(us.id)
+                                                                console.log(props.isFollowingInProgress)
+                                                                debugger
+
                                                             }
+                                                            props.toggleIsFollowingInProgress(false, us.id)
                                                         })
+
                                                 }}>
                                             follow
                                         </button>

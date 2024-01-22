@@ -5,7 +5,7 @@ import {
     setCurrentPage,
     setUsers,
     setUsersTotalCount,
-    toggleIsFetching,
+    toggleIsFetching, toggleIsFollowingInProgress,
     unFollow
 } from "./users-reducer";
 import {setUserDataAC} from "./auth-reducer";
@@ -25,6 +25,7 @@ export type ActionsType =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUsersProfileAC>
     | ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof toggleIsFollowingInProgress>
 
 
 // State types

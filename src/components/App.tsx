@@ -37,9 +37,9 @@ function App() {
                            render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>*/}
                     <Route path={"/dialogs"} render={() => <DialogsContainer
                         state={store.getState()}/>}/>
-                    <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer/>}/>
+                    <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer />}/>
                     <Route path={"/news"} render={() => <News/>}/>
-                    <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
+                    <Route path={"/users"} render={() => <ConnectedUsersContainer />}/>
                 {/*<Route path={"/login"} render={() => <ConnectedHeaderComponent/> }/>*/}
                     <Route path={"/setting"} render={() => <Setting/>}/>
             </div>

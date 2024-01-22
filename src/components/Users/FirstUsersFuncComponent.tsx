@@ -1,10 +1,12 @@
+
 import React, {useEffect} from 'react';
 import s from './Users.module.css'
-import {UsersClassComponentPropsType} from "./UsersContainer";
+//import {UsersClassComponentPropsType} from "./UsersContainer";
 import axios from "axios";
 import UserAvatar from "../../assets/image/userAvatar.jpg"
 
-const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) => {
+/*
+const FirstUsersFuncComponent: React.FC< any /!*UsersClassComponentPropsType*!/> = (props) => {
 
     useEffect(() => {
         axios.get("https://social-network.samuraijs.com/api/1.0/users", {
@@ -51,10 +53,10 @@ const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) 
 
                                 <div className={s.secondUserInfoBlock}>
                                     <h4>
-                                        {/*{us.location.country}*/} Ireland
+                                        {/!*{us.location.country}*!/} Ireland
                                     </h4>
                                     <h4>
-                                        {/*{us.location.city}*/} Dublin
+                                        {/!*{us.location.city}*!/} Dublin
                                     </h4>
                                 </div>
 
@@ -63,7 +65,7 @@ const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) 
                         </div>)
                 })}
 
-                {/*<div className={s.userAddBlock}>
+                {/!*<div className={s.userAddBlock}>
                     <img className={s.avatarImg}
                          src="https://p.kindpng.com/picc/s/21-211180_transparent-businessman-clipart-png-user-man-icon-png.png"
                          alt="avatar"/>
@@ -96,7 +98,7 @@ const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) 
                         </h4>
                     </div>
 
-                </div>*/}
+                </div>*!/}
 
             </div>
         </div>
@@ -105,4 +107,4 @@ const FirstUsersFuncComponent: React.FC<UsersClassComponentPropsType> = (props) 
 
 //export default FirstUsersFuncComponent;
 
-/*{us.userAvatar}*/
+/!*{us.userAvatar}*!/*/
