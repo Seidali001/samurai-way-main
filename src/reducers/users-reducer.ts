@@ -1,6 +1,7 @@
 import {ActionsType} from "./types";
 import {userApi} from "../api/users";
 import {Dispatch} from "redux";
+import axios from "axios";
 
 
 export type UsersFromServerType = {
@@ -20,10 +21,10 @@ export type initialStateUsersType = typeof initialState
 const initialState = {
     items: [] as Array<UsersFromServerType>,
     pageCount: 1,
-    totalUserCounter: 100,
+    totalUserCounter: 60,
     currentPage: 1,
     isFetching: false,
-    isFollowingInProgress: [1, 2] as Array<number>
+    isFollowingInProgress: [] as Array<number>
 }
 
 export const usersReducer = (state: initialStateUsersType = initialState, action: ActionsType): initialStateUsersType => {
@@ -39,6 +40,7 @@ export const usersReducer = (state: initialStateUsersType = initialState, action
                         }
                     }
                     return user
+
                 })
             }
         }
@@ -47,6 +49,7 @@ export const usersReducer = (state: initialStateUsersType = initialState, action
                 ...state,
                 items: state.items.map(user => {
                     if (user.id === action.userId) {
+                        console.log(user)
                         return {
                             ...user,
                             followed: false
@@ -81,7 +84,7 @@ export const usersReducer = (state: initialStateUsersType = initialState, action
             }
         }
         case "TOGGLE-FOLLOWING-PROGRESS": {
-            debugger
+
             return {
                 ...state,
                 isFollowingInProgress: state.isFetching
@@ -135,7 +138,6 @@ export const toggleIsFetching = (isFetching: boolean) => {
     } as const
 }
 export const toggleIsFollowingInProgress = (isFollowing: boolean, userId: number) => {
-    debugger
     return {
         type: "TOGGLE-FOLLOWING-PROGRESS",
         isFollowing,
@@ -143,8 +145,7 @@ export const toggleIsFollowingInProgress = (isFollowing: boolean, userId: number
     } as const
 }
 
-export const getUsersThunkCreator = () => (dispatch: Dispatch) => {
-    debugger
+export const getUsersTC = () => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
     userApi.getUsers()
         .then(data => {
@@ -158,3 +159,47 @@ export const getUsersThunkCreator = () => (dispatch: Dispatch) => {
             console.error("Error fetching users:", error);
         });
 }
+
+export const setCurrentPageTC = (currentPage: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    userApi.getCurrentPageUsers(currentPage, 10)
+        .then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setCurrentPage(currentPage))
+        })
+        .catch(error => {
+            dispatch(toggleIsFetching(false))
+            console.error("Error fetching users:", error);
+        });
+}
+export const setUnfollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingInProgress(true, userId))
+    userApi.setUnfollowUser(userId)
+        .then(data => {
+            if (data.resultCode == 0) {
+                dispatch(unFollow(userId))
+            }
+            dispatch(toggleIsFollowingInProgress(false, userId))
+        })
+        .catch(error => {
+            dispatch(toggleIsFetching(false))
+            console.error("Error unfollowing users:", error);
+        });
+}
+export const setFollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingInProgress(true, userId))
+    userApi.setFollowUser(userId)
+        .then(data => {
+            if (data.resultCode == 0) {
+                dispatch(follow(userId))
+            }
+            dispatch(toggleIsFollowingInProgress(false, userId))
+        })
+        .catch(error => {
+            dispatch(toggleIsFetching(false))
+            console.error("Error following user:", error);
+        });
+}
+
+

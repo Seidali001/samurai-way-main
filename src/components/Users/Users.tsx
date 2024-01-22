@@ -4,8 +4,6 @@ import UserAvatar from "../../assets/image/userAvatar.jpg";
 import {UsersFromServerType} from "../../reducers/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {deepEqual} from "node:assert";
 
 
 type UsersType = {
@@ -16,13 +14,11 @@ type UsersType = {
     pageCount: number
     currentPage: number
     setCurrentPage: (p: number) => void
-    setUnfollow: (id: number) => void
-    setFollow: (id: number) => void
-    toggleIsFollowingInProgress: (isFollowing: boolean, userId: number) => void
+    setFollowTC: (userId: number) => void
+    setUnfollowTC: (userId: number) => void
 }
 
 const Users: React.FC<UsersType> = (props) => {
-
     if (props.users === null) {
         return <p>Loading...</p>; // или любая другая заглушка
     }
@@ -52,6 +48,7 @@ const Users: React.FC<UsersType> = (props) => {
                         <Preloader/>
                         :
                         props.users.map(us => {
+
                             return (
                                 <div className={s.usersBlock} key={us.id}>
                                 <span className={s.userAddBlock}>
@@ -62,52 +59,21 @@ const Users: React.FC<UsersType> = (props) => {
                                       />
                                     </NavLink>
                                     {us.followed ?
-                                        <button disabled={props.isFollowingInProgress.some(id => id === us.id)}
+                                        <button key={'unfollow'}
+                                                disabled={props.isFollowingInProgress.some(id => id === us.id)}
                                                 className={s.unFollow}
                                                 onClick={() => {
-                                                    props.toggleIsFollowingInProgress(true, us.id)
-                                                    let userId = us.id
-                                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-                                                        withCredentials: true,
-                                                        headers: {
-                                                            "API-KEY": "49d35d50-df50-4fa4-b94f-9014bc346a45"
-                                                        }
-                                                    })
-                                                        .then(res => {
-                                                            if (res.data.resultCode == 0) {
-                                                                props.setUnfollow(us.id)
-                                                                console.log(props.isFollowingInProgress)
-                                                                debugger
-                                                            }
-                                                            props.toggleIsFollowingInProgress(false, us.id)
-
-                                                        })
+                                                    props.setUnfollowTC(us.id)
                                                 }}
                                                 >
                                             unfollow
                                         </button>
                                         :
-                                        <button disabled={props.isFollowingInProgress.some(id => id === us.id)}
+                                        <button key={'follow'}
+                                                disabled={props.isFollowingInProgress.some(id => id === us.id)}
                                                 className={s.follow}
                                                 onClick={() => {
-                                                    let userId = us.id
-                                                    props.toggleIsFollowingInProgress(true, us.id)
-                                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
-                                                        withCredentials: true,
-                                                        headers: {
-                                                            "API-KEY": "49d35d50-df50-4fa4-b94f-9014bc346a45"
-                                                        }
-                                                    })
-                                                        .then(res => {
-                                                            if (res.data.resultCode == 0) {
-                                                                props.setFollow(us.id)
-                                                                console.log(props.isFollowingInProgress)
-                                                                debugger
-
-                                                            }
-                                                            props.toggleIsFollowingInProgress(false, us.id)
-                                                        })
-
+                                                    props.setFollowTC(us.id)
                                                 }}>
                                             follow
                                         </button>
