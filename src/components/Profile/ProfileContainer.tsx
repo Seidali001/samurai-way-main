@@ -5,7 +5,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux-store/redux-store";
 import {Dispatch} from "redux";
-import {ServerUserProfileType, setUsersProfileAC} from "../../reducers/profile-reducer";
+import {ServerUserProfileType, setUserProfileTC, setUsersProfileAC} from "../../reducers/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {profileApi} from "../../api/profile";
 
@@ -24,16 +24,17 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 type mapDispatchToPropsType = {
-    setUserProfile: (profile: ServerUserProfileType) => void
+    /*setUserProfile: (profile: ServerUserProfileType) => void*/
+    setUserProfileTC: (userId: number) => void
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+/*const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         setUserProfile: (profile: ServerUserProfileType) => {
             dispatch(setUsersProfileAC(profile))
         }
     }
-}
+}*/
 
 export type ComponentWithRouterPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -46,17 +47,11 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
     }
 
     componentDidMount() {
-        let userId = this.props.match.params.userId
+        let userId = +this.props.match.params.userId
         if (!userId) {
-            userId = "2"
+            userId = 2
         }
-        profileApi.getProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data);
-            })
-            .catch(error => {
-                console.error("Error fetching users:", error);
-            });
+        this.props.setUserProfileTC(userId)
     }
 
     render() {
@@ -76,4 +71,6 @@ export default ProfileContainer;
 let ComponentWithRouter = withRouter(ProfileContainer)
 
 
-export const ConnectedUserProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ComponentWithRouter)
+export const ConnectedUserProfileContainer = connect(mapStateToProps,  {
+    setUserProfileTC
+})(ComponentWithRouter)

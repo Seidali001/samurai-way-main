@@ -4,13 +4,6 @@ import Post from "./Post/Post";
 import {ProfilePagesType} from "../../../reducers/types";
 import {MyPostsPropsType} from "../MyPostsContainer/MyPostsContainer";
 
-// type MyPostsType = {
-//     profilePages: ProfilePagesType
-//     setNewPostCallback: (text: string) => void
-//     addNewPostCallback: () => void
-//
-// }
-
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 

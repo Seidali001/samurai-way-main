@@ -1,4 +1,6 @@
 import {ActionsType} from "./types";
+import {profileApi} from "../api/profile";
+import {Dispatch} from "redux";
 
 
 
@@ -99,4 +101,14 @@ export const setUsersProfileAC = (profile: ServerUserProfileType ) => {
         type: "SET-USER-PROFILE",
         profile
     } as const
+}
+
+export const setUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
+    profileApi.getProfile(userId)
+        .then(data => {
+            dispatch(setUsersProfileAC(data))
+        })
+        .catch(error => {
+            console.error("Error fetching users:", error);
+        });
 }

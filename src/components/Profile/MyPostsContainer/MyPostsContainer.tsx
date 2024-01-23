@@ -13,22 +13,8 @@ type MyPostsType = {
 
 const MyPostsContainer: React.FC<MyPostsType> = () => {
 
-    // const profilePages = props.profilePages
-    //
-    // const dispatch = useDispatch()
-    //
-    // const setNewPostCallback = (text: string ) => {
-    //     dispatch( updateNewTextPostAC(text))
-    // }
-    //
-    // const addNewPostCallback = () => {
-    //     dispatch(addPostAC())
-    // }
-
-
     return (
         <div>
-           {/*<MyPosts profilePages={profilePages} setNewPostCallback={setNewPostCallback} addNewPostCallback={addNewPostCallback}/>*/}
             <ConnectedMyPostsContainer/>
         </div>
     )
