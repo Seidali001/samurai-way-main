@@ -13,9 +13,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
     return (
         <div>
-            <div className={s.image}>
+            {/*<div className={s.image}>
                 <img alt={"image"} style={{width: "100%"}} src={socialMedia}/>
-            </div>
+            </div>*/}
             <div className={s.descriptionBlock}>
                 <div>
                     <h2>{props.profile.fullName}</h2>

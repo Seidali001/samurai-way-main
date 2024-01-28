@@ -3,6 +3,8 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {ProfilePagesType} from "../../../reducers/types";
 import {MyPostsPropsType} from "../MyPostsContainer/MyPostsContainer";
+import {Redirect} from "react-router-dom";
+import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -15,7 +17,6 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     const addNewPost = () => {
         props.addNewPostCallback()
     }
-
 
     return (
         <div className={s.postBlock}>

@@ -21,7 +21,7 @@ type UsersType = {
 
 const Users: React.FC<UsersType> = (props) => {
 
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
 
     if (props.users === null) {
         return <p>Loading...</p>; // или любая другая заглушка
@@ -52,7 +52,6 @@ const Users: React.FC<UsersType> = (props) => {
                         <Preloader/>
                         :
                         props.users.map(us => {
-
                             return (
                                 <div className={s.usersBlock} key={us.id}>
                                 <span className={s.userAddBlock}>

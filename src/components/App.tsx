@@ -7,24 +7,19 @@ import News from "./News/News";
 import Setting from "./Setting/Setting";
 import error from "./error.jpg"
 import Sidebar from "./Sidebar/Sidebar";
-
-import {useSelector} from "react-redux";
-import store, {AppRootStateType} from "../redux-store/redux-store";
-import {DialogPagesType, ProfilePagesType} from "../reducers/types";
-import DialogsContainer from "./DialogsContainer/DialogsContainer";
+import {ConnectedDialogsComponent} from "./DialogsContainer/DialogsContainer";
 import {ConnectedUsersContainer} from "./Users/UsersContainer";
 import React from "react";
-import ProfileContainer, {ConnectedUserProfileContainer} from "./Profile/ProfileContainer";
+import {ConnectedUserProfileContainer} from "./Profile/ProfileContainer";
 import {ConnectedHeaderComponent} from "./Header/HeaderContainer/HeaderContainer";
+import Login from "./Login/Login";
 
 
 function App() {
 
-/*    const dialogPages = useSelector<AppRootStateType, DialogPagesType>(state => state.dialogPages)
-    const profilePages = useSelector<AppRootStateType, ProfilePagesType>(state => state.profilePage)*/
     return (
         <div className="app-wrapper">
-            <ConnectedHeaderComponent />
+            <ConnectedHeaderComponent/>
             <Navbar/>
             <Sidebar/>
             <div className="app-wrapper-content">
@@ -33,15 +28,14 @@ function App() {
                 <NavLink to={"/users"}/>
                 <NavLink to={"/news"}/>
                 <NavLink to={"/setting"}/>
-                   {/* <Route path={"/*"}
+                {/* <Route path={"/*"}
                            render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>*/}
-                    <Route path={"/dialogs"} render={() => <DialogsContainer
-                        state={store.getState()}/>}/>
-                    <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer />}/>
-                    <Route path={"/news"} render={() => <News/>}/>
-                    <Route path={"/users"} render={() => <ConnectedUsersContainer />}/>
-                {/*<Route path={"/login"} render={() => <ConnectedHeaderComponent/> }/>*/}
-                    <Route path={"/setting"} render={() => <Setting/>}/>
+                <Route path={"/login"} render={() => <Login/>}/>
+                <Route path={"/dialogs"} render={() => <ConnectedDialogsComponent />}/>
+                <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer/>}/>
+                <Route path={"/news"} render={() => <News/>}/>
+                <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
+                <Route path={"/setting"} render={() => <Setting/>}/>
             </div>
         </div>
     );

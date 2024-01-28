@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {ProfilePagesType} from "../../reducers/types";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux-store/redux-store";
-import {Dispatch} from "redux";
-import {ServerUserProfileType, setUserProfileTC, setUsersProfileAC} from "../../reducers/profile-reducer";
+import {setUserProfileTC} from "../../reducers/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {profileApi} from "../../api/profile";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+
 
 type PathParamsType = {
     userId: string
@@ -24,17 +24,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 type mapDispatchToPropsType = {
-    /*setUserProfile: (profile: ServerUserProfileType) => void*/
     setUserProfileTC: (userId: number) => void
 }
-
-/*const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        setUserProfile: (profile: ServerUserProfileType) => {
-            dispatch(setUsersProfileAC(profile))
-        }
-    }
-}*/
 
 export type ComponentWithRouterPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -66,11 +57,8 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
 }
 
 
-export default ProfileContainer;
-
-let ComponentWithRouter = withRouter(ProfileContainer)
-
-
-export const ConnectedUserProfileContainer = connect(mapStateToProps,  {
-    setUserProfileTC
-})(ComponentWithRouter)
+export const ConnectedUserProfileContainer = compose(
+    connect(mapStateToProps, { setUserProfileTC }),
+    withRouter,
+    WithAuthRedirect
+)(ProfileContainer) as React.ComponentType; // Оборачиваем компонент в compose и указываем тип React.ComponentType

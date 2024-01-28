@@ -4,7 +4,9 @@ import {addPostAC, updateNewTextPostAC} from "../../../reducers/profile-reducer"
 import {connect} from "react-redux";
 import MyPosts from "../MyPosts/MyPosts";
 import {AppRootStateType} from "../../../redux-store/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {UsersClassApiComponent} from "../../Users/UsersContainer";
 
 type MyPostsType = {
     profilePages: ProfilePagesType
@@ -28,7 +30,7 @@ type mapStateToPropsType = {
 
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
-        profilePages: state.profilePage
+        profilePages: state.profilePage,
     }
 }
 
@@ -48,5 +50,14 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-const ConnectedMyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+// let AuthRedirectComponent = WithAuthRedirect(MyPosts)
+
+//const ConnectedMyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+const ConnectedMyPostsContainer = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(MyPosts) as React.ComponentType; // Оборачиваем компонент в compose и указываем тип React.ComponentType
+
+
 export default MyPostsContainer;

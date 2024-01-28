@@ -10,6 +10,8 @@ import {
 } from "../../reducers/users-reducer";
 import {AppRootStateType} from "../../redux-store/redux-store";
 import Users from "./Users";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 export type UsersClassComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
@@ -41,7 +43,7 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
         totalUserCount: state.usersPage.totalUserCounter,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowingInProgress: state.usersPage.isFollowingInProgress
+        isFollowingInProgress: state.usersPage.isFollowingInProgress,
     }
 
 }
@@ -57,9 +59,11 @@ export class UsersClassApiComponent extends React.Component<UsersClassComponentP
     }
 
     render() {
+
         return (
             <>
                 <Users
+                    key={"users"}
                     isFetching={this.props.isFetching}
                     isFollowingInProgress={this.props.isFollowingInProgress}
                     users={this.props.users}
@@ -75,13 +79,18 @@ export class UsersClassApiComponent extends React.Component<UsersClassComponentP
     }
 }
 
-export const ConnectedUsersContainer = connect(mapStateToProps,
-    {
-        follow, unFollow, setUsers,
-        setCurrentPage, setUsersTotalCount, toggleIsFetching,
-        toggleIsFollowingInProgress, getUsersTC, setCurrentPageTC,
-        setFollowTC, setUnfollowTC
-    })(UsersClassApiComponent)
+// let AuthRedirectComponent = WithAuthRedirect(UsersClassApiComponent)
+
+export const ConnectedUsersContainer = compose(
+    connect(mapStateToProps,
+        {
+            follow, unFollow, setUsers,
+            setCurrentPage, setUsersTotalCount, toggleIsFetching,
+            toggleIsFollowingInProgress, getUsersTC, setCurrentPageTC,
+            setFollowTC, setUnfollowTC
+        }),
+    WithAuthRedirect
+)(UsersClassApiComponent) as React.ComponentType; // Оборачиваем компонент в compose и указываем тип React.ComponentType
 
 
 

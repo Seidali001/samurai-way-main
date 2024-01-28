@@ -10,9 +10,7 @@ type ProfileType = {
     state: ProfilePagesType
 }
 const Profile: React.FC<ProfileType> = (props) => {
-    /*if (!props.state.profile) {
-        return <Preloader/>
-    }*/
+
     return (
         <div>
             <ProfileInfo profile={props?.state?.profile}/>

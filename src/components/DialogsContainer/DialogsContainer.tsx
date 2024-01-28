@@ -3,40 +3,21 @@ import {addMessageAC, initialStateDialogsType, updateNewTextMessageAC} from "../
 import {connect} from "react-redux";
 import Dialogs from "../Dialogs/Dialogs";
 import {AppRootStateType} from "../../redux-store/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
-
-type DialogsType = {
-    state: AppRootStateType
-}
-
-const DialogsContainer: React.FC<DialogsType> = (props) => {
-
-    // const dispatch = useDispatch()
-    // const onChangeHandlerCallback = (text: string) => {
-    //     dispatch(updateNewTextMessageAC(text))
-    // }
-    //
-    // const sendMessageCallback = () => {
-    //     dispatch(addMessageAC())
-    // }
-    //
-
-    return (
-       // <Dialogs dialogPages={props.state.dialogPages} sendMessageCallback={sendMessageCallback} onChangeHandlerCallback={onChangeHandlerCallback}/>
-        <ConnectedDialogsComponent/>
-    );
-};
 
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 type mapStateToPropsType = {
     dialogPages: initialStateDialogsType
+
 }
 
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
-        dialogPages: state.dialogPages
+        dialogPages: state.dialogPages,
+
     }
 }
 
@@ -56,7 +37,15 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-const ConnectedDialogsComponent = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
+/*
 
-export default DialogsContainer;
+let AuthRedirectComponent = WithAuthRedirect(Dialogs)
+
+//export const ConnectedDialogsComponent = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+*/
+
+export const ConnectedDialogsComponent = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(Dialogs) as React.ComponentType; // Оборачиваем компонент в compose и указываем тип React.ComponentType

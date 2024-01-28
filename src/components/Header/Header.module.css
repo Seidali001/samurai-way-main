@@ -22,6 +22,7 @@
 .loginLink {
     float: right;
     margin: 20px;
+    color: white;
 }
 
 .loginLink a {
