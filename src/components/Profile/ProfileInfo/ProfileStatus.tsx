@@ -36,7 +36,9 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
+        debugger
         if (prevProps.status !== this.props.status) {
+            debugger
             this.setState({
                 status: this.props.status
             })
@@ -50,7 +52,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                 {
                     !this.state.editMode ?
                     <div>
-                        <h3 onDoubleClick={this.activeMode.bind(this)}>{this.props.status}</h3>
+                        <h3 style={{cursor: "pointer"}} onDoubleClick={this.activeMode.bind(this)}>{this.props.status}</h3>
                     </div>
                     :
                     <div>
