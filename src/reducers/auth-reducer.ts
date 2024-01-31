@@ -51,9 +51,9 @@ export const setUserDataAC = (data: ServerAuthUserDataType) => {
 export const authMeTC = () => (dispatch: Dispatch) => {
     authMeApi.getAuthMe()
         .then(data => {
-            console.log(data.data.resultCode)
+            //console.log(data.data.resultCode)
             if (data.data.resultCode === 0) {
-                console.log(data.data.data)
+               // console.log(data.data.data)
                 dispatch(setUserDataAC(data.data.data))
             }
            // dispatch(setUserDataAC(data))

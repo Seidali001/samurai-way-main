@@ -30,12 +30,13 @@ function App() {
                 <NavLink to={"/setting"}/>
                 {/* <Route path={"/*"}
                            render={() => <img alt={"error"} src={error} style={{width: "100%", height: "100%"}}/>}/>*/}
-                <Route path={"/login"} render={() => <Login/>}/>
+
                 <Route path={"/dialogs"} render={() => <ConnectedDialogsComponent />}/>
                 <Route path={"/profile/:userId?"} render={() => <ConnectedUserProfileContainer/>}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/users"} render={() => <ConnectedUsersContainer/>}/>
                 <Route path={"/setting"} render={() => <Setting/>}/>
+                <Route path={"/login"} render={() => <Login/>}/>
             </div>
         </div>
     );

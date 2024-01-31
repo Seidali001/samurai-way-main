@@ -1,12 +1,15 @@
 import React from 'react';
 import s from "./ProfileInfo.module.css";
 import socialMedia from "../MyPosts/socialMedia.jpg";
-import {ServerUserProfileType} from "../../../reducers/profile-reducer";
+import {ServerUserProfileType, updateUserProfileStatusTC} from "../../../reducers/profile-reducer";
+import ProfileStatus from "./ProfileStatus"
 import Preloader from "../../common/Preloader/Preloader";
 
 
 type ProfileInfoType = {
     profile: ServerUserProfileType
+    status: string
+    updateUserProfileStatusTC: (status: string) => void
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
@@ -24,6 +27,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                 <div>
                     <span>{props.profile.aboutMe}</span>
                 </div>
+                <ProfileStatus status={props.status} updateUserProfileStatusTC={props.updateUserProfileStatusTC}/>
             </div>
         </div>
     );

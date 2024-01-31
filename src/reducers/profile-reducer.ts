@@ -3,7 +3,6 @@ import {profileApi} from "../api/profile";
 import {Dispatch} from "redux";
 
 
-
 type ContactType = {
     facebook: string,
     website: null,
@@ -36,6 +35,8 @@ export type PostsType = {
     likesCount: number
 }
 
+
+
 export type initialStateProfileType = typeof initialState
 
 const initialState = {
@@ -47,7 +48,8 @@ const initialState = {
         {id: 4, text: "Your welcome", likesCount: 12},
         {id: 5, text: "see a later", likesCount: 2}
     ] as Array<PostsType>,
-    profile: {} as ServerUserProfileType
+    profile: {} as ServerUserProfileType,
+    status: ""
 }
 
 export const profileReducer = (state = initialState, action: ActionsType): initialStateProfileType => {
@@ -78,6 +80,13 @@ export const profileReducer = (state = initialState, action: ActionsType): initi
                 profile: action.profile
             }
         }
+        case "SET-USER-PROFILE-STATUS": {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
+
         default:
             return state
     }
@@ -96,12 +105,20 @@ export const updateNewTextPostAC = (newText: string) => {
         newText
     } as const
 }
-export const setUsersProfileAC = (profile: ServerUserProfileType ) => {
+export const setUsersProfileAC = (profile: ServerUserProfileType) => {
     return {
         type: "SET-USER-PROFILE",
         profile
     } as const
 }
+export const setUsersProfileStatusAC = (status: string) => {
+    return {
+        type: "SET-USER-PROFILE-STATUS",
+        status
+    } as const
+}
+
+
 
 export const setUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
     profileApi.getProfile(userId)
@@ -112,3 +129,27 @@ export const setUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
             console.error("Error fetching users:", error);
         });
 }
+export const getUserProfileStatusTC = (userId: number) => (dispatch: Dispatch) => {
+    profileApi.getProfileStatus(userId)
+        .then(res => {
+            dispatch(setUsersProfileStatusAC(res.data))
+        })
+        .catch(error => {
+            console.error("Error fetching users:", error);
+        });
+}
+
+export const updateUserProfileStatusTC = (status: string) => (dispatch: Dispatch) => {
+    profileApi.updateProfileStatus(status)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUsersProfileStatusAC(status))
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching users:", error);
+        });
+}
+
+
+

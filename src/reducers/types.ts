@@ -1,5 +1,11 @@
 import {addMessageAC, updateNewTextMessageAC} from "./dialogs-reducer";
-import {addPostAC, ServerUserProfileType, setUsersProfileAC, updateNewTextPostAC} from "./profile-reducer";
+import {
+    addPostAC,
+    ServerUserProfileType,
+    setUsersProfileAC,
+    setUsersProfileStatusAC,
+    updateNewTextPostAC,
+} from "./profile-reducer";
 import {
     follow,
     setCurrentPage,
@@ -26,6 +32,7 @@ export type ActionsType =
     | ReturnType<typeof setUsersProfileAC>
     | ReturnType<typeof setUserDataAC>
     | ReturnType<typeof toggleIsFollowingInProgress>
+    | ReturnType<typeof setUsersProfileStatusAC>
 
 
 // State types

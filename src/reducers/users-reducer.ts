@@ -159,6 +159,13 @@ export const getUsersTC = () => (dispatch: Dispatch) => {
 
             console.error("Error fetching users:", error);
         });
+    axios.put("https://social-network.samuraijs.com/api/1.0/profile/status")
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.error(error)
+        })
 }
 
 export const setCurrentPageTC = (currentPage: number) => (dispatch: Dispatch) => {
