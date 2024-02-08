@@ -22,15 +22,11 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 type mapDispatchToPropsType = {
-    /*onChangeHandlerCallback: (text: string) => void*/
     sendMessageCallback: (newTextMessage: string) => void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        /*onChangeHandlerCallback: (text: string) => {
-            dispatch(updateNewTextMessageAC(text))
-        },*/
         sendMessageCallback: (newTextMessage: string) => {
             dispatch(addMessageAC(newTextMessage))
         }
