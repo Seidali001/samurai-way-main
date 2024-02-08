@@ -13,7 +13,7 @@ type MessagesType = {
 export type initialStateDialogsType = typeof initialState
 
 const initialState = {
-    newTextMessage: "",
+
     dialogs: [
         {name: "Maks", id: 1},
         {name: "Jack", id: 2},
@@ -34,7 +34,7 @@ const initialState = {
 export const dialogsReducer = (state = initialState, action: ActionsType): initialStateDialogsType => {
     switch (action.type) {
         case "UPDATE-NEW-TEXT-MESSAGE": {
-            state.newTextMessage = action.newTextMessage
+           // state.newTextMessage = action.newTextMessage
             return {
                 ...state
             }
@@ -42,12 +42,11 @@ export const dialogsReducer = (state = initialState, action: ActionsType): initi
         case "ADD-MESSAGE": {
             const newMessage: MessagesType = {
                 id: 56,
-                message: state.newTextMessage
+                message: action.newTextMessage
             }
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newTextMessage: ""
             }
         }
         default:
@@ -63,9 +62,10 @@ export const updateNewTextMessageAC = (newTextMessage: string) => {
         newTextMessage: newTextMessage
     } as const
 }
-export const addMessageAC = () => {
+export const addMessageAC = (newTextMessage: string) => {
     return {
-        type: "ADD-MESSAGE"
+        type: "ADD-MESSAGE",
+        newTextMessage
     } as const
 }
 

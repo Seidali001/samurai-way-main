@@ -40,7 +40,7 @@ export type PostsType = {
 export type initialStateProfileType = typeof initialState
 
 const initialState = {
-    newText: "",
+
     posts: [
         {id: 1, text: "how are you?", likesCount: 11},
         {id: 2, text: "I hope so!", likesCount: 45},
@@ -58,22 +58,16 @@ export const profileReducer = (state = initialState, action: ActionsType): initi
         case "ADD-POST": {
             const post = {
                 id: 8,
-                text: state.newText,
+                text: action.postText,
                 likesCount: 123
             }
             return {
                 ...state,
                 posts: [post, ...state.posts],
-                newText: ""
+
             }
         }
 
-        case "UPDATE-NEW-TEXT-POST": {
-            return {
-                ...state,
-                newText: action.newText
-            }
-        }
         case "SET-USER-PROFILE": {
             return {
                 ...state,
@@ -94,17 +88,13 @@ export const profileReducer = (state = initialState, action: ActionsType): initi
 
 
 // Action Creators
-export const addPostAC = () => {
+export const addPostAC = (postText: string) => {
     return {
-        type: "ADD-POST"
+        type: "ADD-POST",
+        postText
     } as const
 }
-export const updateNewTextPostAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-TEXT-POST",
-        newText
-    } as const
-}
+
 export const setUsersProfileAC = (profile: ServerUserProfileType) => {
     return {
         type: "SET-USER-PROFILE",

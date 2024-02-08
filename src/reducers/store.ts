@@ -1,5 +1,5 @@
 // Store methods
-import {addPostAC, profileReducer, updateNewTextPostAC} from "./profile-reducer";
+import {addPostAC, profileReducer} from "./profile-reducer";
 import {addMessageAC, dialogsReducer, updateNewTextMessageAC} from "./dialogs-reducer";
 
 /*

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {validate} from "./Login";
 
 
 export type FormValuesType = {
@@ -8,9 +9,11 @@ export type FormValuesType = {
     rememberMe: boolean;
 }
 
+
 const LoginForm: React.FC<InjectedFormProps<FormValuesType>> = (props) => {
 
   //  const { handleSubmit} = props;
+
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -23,5 +26,6 @@ const LoginForm: React.FC<InjectedFormProps<FormValuesType>> = (props) => {
         </form>
     );
 };
+
 
 export const LoginReduxForm = reduxForm<FormValuesType>({form: "login"})(LoginForm)

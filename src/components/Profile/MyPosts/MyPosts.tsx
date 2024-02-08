@@ -1,21 +1,15 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ProfilePagesType} from "../../../reducers/types";
 import {MyPostsPropsType} from "../MyPostsContainer/MyPostsContainer";
-import {Redirect} from "react-router-dom";
-import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {DialogReduxForm, FormValuesForMyPostType} from "./MyPostForm/MyPostForm";
+
 
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-    const setNewPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newPost = e.currentTarget.value
-        props.setNewPostCallback(newPost)
-    }
-
-    const addNewPost = () => {
-        props.addNewPostCallback()
+    const onSubmitHandler = (values: FormValuesForMyPostType) => {
+        props.addNewPostCallback(values.postText)
     }
 
     return (
@@ -23,18 +17,19 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             <div>
                 <h3>My post:</h3>
                 <div>
-                    <textarea value={props.profilePages.newText} onChange={setNewPost}>
-                    </textarea>
+
+
                 </div>
-                <div>
-                    <button onClick={addNewPost}>add post</button>
-                </div>
+                <DialogReduxForm onSubmit={onSubmitHandler}/>
                 <div className={s.postBlock}>
-                    {props.profilePages.posts.map((p, i) => <Post key={i} id={p.id} text={p.text} likesCount={p.likesCount}/>)}
+                    {props.profilePages.posts.map((p, i) => <Post key={i} id={p.id} text={p.text}
+                                                                  likesCount={p.likesCount}/>)}
                 </div>
 
             </div>
         </div>
     )
 }
+
+
 export default MyPosts;

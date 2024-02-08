@@ -1,9 +1,12 @@
 import React from 'react';
 import s from './Login.module.css'
 import {FormValuesType, LoginReduxForm} from "./LoginForm";
+import {connect} from "react-redux";
 
 
+export const validate = () => {
 
+}
 
 const Login = () => {
     const onSubmitHandler = (formData: FormValuesType) => {
@@ -17,6 +20,11 @@ console.log(formData)
         </div>
     );
 };
+
+const ConnectedLogin = connect(
+
+
+)(Login)
 
 export default Login
 

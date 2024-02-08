@@ -1,6 +1,6 @@
 import React from "react";
 import {ProfilePagesType} from "../../../reducers/types";
-import {addPostAC, updateNewTextPostAC} from "../../../reducers/profile-reducer";
+import {addPostAC} from "../../../reducers/profile-reducer";
 import {connect} from "react-redux";
 import MyPosts from "../MyPosts/MyPosts";
 import {AppRootStateType} from "../../../redux-store/redux-store";
@@ -35,24 +35,17 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 type mapDispatchToPropsType = {
-    setNewPostCallback: (text: string ) => void
-    addNewPostCallback: () => void
+    addNewPostCallback: (postText: string) => void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        setNewPostCallback: (text: string ) => {
-            dispatch( updateNewTextPostAC(text))
-        },
-        addNewPostCallback: () => {
-            dispatch(addPostAC())
+        addNewPostCallback: (postText: string) => {
+            dispatch(addPostAC(postText))
         }
     }
 }
 
-// let AuthRedirectComponent = WithAuthRedirect(MyPosts)
-
-//const ConnectedMyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 const ConnectedMyPostsContainer = compose(
     connect(mapStateToProps, mapDispatchToProps),

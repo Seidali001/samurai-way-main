@@ -4,7 +4,6 @@ import {
     ServerUserProfileType,
     setUsersProfileAC,
     setUsersProfileStatusAC,
-    updateNewTextPostAC,
 } from "./profile-reducer";
 import {
     follow,
@@ -21,7 +20,6 @@ import {setUserDataAC} from "./auth-reducer";
 export type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof updateNewTextPostAC>
     | ReturnType<typeof updateNewTextMessageAC>
     | ReturnType<typeof follow>
     | ReturnType<typeof unFollow>
@@ -42,7 +40,6 @@ type PostsType = {
     likesCount: number
 }
 export type ProfilePagesType = {
-    newText: string
     posts: PostsType[]
     profile: ServerUserProfileType
 }
